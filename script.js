@@ -262,51 +262,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
-    const button = form.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('form-message');
-    
-    // Disable button and show loading state
-    button.disabled = true;
-    button.textContent = 'Sending...';
-    messageDiv.textContent = '';
-    messageDiv.className = 'form-message';
-    
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        
-        if (response.ok) {
-            // Success!
-            messageDiv.textContent = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!';
-            messageDiv.className = 'form-message success';
-            form.reset();
-        } else {
-            // Error
-            messageDiv.textContent = 'Oops! There was a problem sending your message. Please try again.';
-            messageDiv.className = 'form-message error';
-        }
-    } catch (error) {
-        // Network error
-        messageDiv.textContent = 'Oops! There was a problem sending your message. Please try again.';
-        messageDiv.className = 'form-message error';
-    }
-    
-    // Re-enable button
-    button.disabled = false;
-    button.textContent = 'Send Message';
-});
-
-
 // ============================================
 // PRELOAD CRITICAL ANIMATIONS
 // ============================================
